@@ -59,6 +59,14 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     tableView.dataSource = self;
     self.currCount = 1;
     self.tableView = tableView;
+    if (_headerView != nil) {
+        
+        tableView.tableHeaderView = _headerView();
+    }
+    if (_footerView != nil) {
+        
+        tableView.tableFooterView = _footerView();
+    }
     self.cellData = [NSMutableArray array];
     self.sections = [NSMutableArray array];
     return tableView;

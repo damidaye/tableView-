@@ -29,18 +29,30 @@
 
     self.table.refreshFooter = ^(NSString *currPage){
         
-        //[self fetchData:currPage];
-        [self fetchSectionData:currPage];
+        [self fetchData:currPage];
+        //[self fetchSectionData:currPage];
     };
     
     self.table.refreshHeader = ^(NSString *currPage){
         
-        //[self fetchData:currPage];
-        [self fetchSectionData:currPage];
+        [self fetchData:currPage];
+        //[self fetchSectionData:currPage];
 
     };
+    self.table.headerView = ^UIView *{
+        
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+        view.backgroundColor = [UIColor blueColor];
+        return view;
+    };
     
-    self.count = 3;
+    self.table.footerView = ^UIView *{
+        
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
+        view.backgroundColor = [UIColor orangeColor];
+        return view;
+    };
+    self.count = 1;
     self.arrM = [NSMutableArray array];
     
     if (self.count == 1) {
