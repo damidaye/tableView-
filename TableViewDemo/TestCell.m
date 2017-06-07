@@ -19,7 +19,6 @@
 - (void)setCellModel:(id)T{
     
     TestCellModel *model = T;
-
     self.textLabel.text = model.text;
     self.backgroundColor = model.color;
 }

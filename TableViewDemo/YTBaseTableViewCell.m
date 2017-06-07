@@ -11,7 +11,8 @@
 @implementation YTBaseTableViewCell
 
 - (void)awakeFromNib {
-
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     [super awakeFromNib];
 }
 
@@ -27,6 +28,11 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
-    return [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    }
+    return self;
 }
 @end

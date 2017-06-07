@@ -265,4 +265,21 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    id model;
+    [tableView deselectRowAtIndexPath:indexPath animated:false];
+    if (self.sections.count != 0) {
+        
+        if (indexPath.section>self.sections.count) {return;}
+        model = self.sections[indexPath.section].cellModel[indexPath.row];
+        
+    }else{
+        
+        if (indexPath.section>self.cellData.count) {return;}
+        model = self.cellData[indexPath.row];
+    }
+    !_didSelect? : _didSelect(tableView,indexPath,model);
+}
+
 @end

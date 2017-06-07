@@ -14,6 +14,7 @@
 typedef UIView *(^viewClosure)();
 typedef void(^refreshClosure)(NSString *currPage);
 typedef void(^callBack)();
+typedef void(^selectClosure)(UITableView *tableView,NSIndexPath *indexPath,id model);
 
 @interface YTBaseTableview : NSObject
 
@@ -36,5 +37,7 @@ typedef void(^callBack)();
 @property(nonatomic,copy)refreshClosure refreshHeader;
 
 @property(nonatomic,copy)refreshClosure refreshFooter;
+
+@property(nonatomic,copy)selectClosure didSelect;
 
 @end

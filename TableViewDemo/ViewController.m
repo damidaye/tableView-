@@ -39,6 +39,11 @@
         //[self fetchSectionData:currPage];
 
     };
+    
+    self.table.didSelect = ^(UITableView *tableView, NSIndexPath *indexPath, id model) {
+        TestCellModel *m = model;
+        NSLog(@"%@",m.text);
+    };
     self.table.headerView = ^UIView *{
         
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
@@ -52,7 +57,7 @@
         view.backgroundColor = [UIColor orangeColor];
         return view;
     };
-    self.count = 1;
+    self.count = 3;
     self.arrM = [NSMutableArray array];
     
     if (self.count == 1) {
