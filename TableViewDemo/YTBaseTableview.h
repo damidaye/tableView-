@@ -11,6 +11,7 @@
 #import "YTTableViewHeaderFooterView.h"
 #import "YTBaseTableViewSectionModel.h"
 #import "YTBaseTableViewCell.h"
+#define BTWeakSelf __weak typeof(self) weakSelf = self;
 typedef UIView *(^viewClosure)();
 typedef void(^refreshClosure)(NSString *currPage);
 typedef void(^callBack)();

@@ -98,23 +98,24 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
 
 - (void)configTable{
     
+    BTWeakSelf;
     if (self.refreshHeader != nil) {
         
-        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
-            self.state = TableRefreshDown;
-            self.currCount = 1;
-            self.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
+            weakSelf.state = TableRefreshDown;
+            weakSelf.currCount = 1;
+            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
         }];
         
     }
     if (self.refreshFooter != nil) {
         
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
-            self.state = TableRefreshUp;
-            self.currCount++;
-            self.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
+            weakSelf.state = TableRefreshUp;
+            weakSelf.currCount++;
+            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
         }];
     }
 }

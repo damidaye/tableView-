@@ -44,20 +44,20 @@
         TestCellModel *m = model;
         NSLog(@"%@",m.text);
     };
-    self.table.headerView = ^UIView *{
-        
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
-        view.backgroundColor = [UIColor blueColor];
-        return view;
-    };
-    
-    self.table.footerView = ^UIView *{
-        
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
-        view.backgroundColor = [UIColor orangeColor];
-        return view;
-    };
-    self.count = 3;
+//    self.table.headerView = ^UIView *{
+//        
+//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+//        view.backgroundColor = [UIColor blueColor];
+//        return view;
+//    };
+//    
+//    self.table.footerView = ^UIView *{
+//        
+//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
+//        view.backgroundColor = [UIColor orangeColor];
+//        return view;
+//    };
+    self.count = 1;
     self.arrM = [NSMutableArray array];
     
     if (self.count == 1) {
@@ -118,7 +118,7 @@
         TestCellModel *model1 = [[TestCellModel alloc]initWithText:@"第1个" color:[UIColor redColor]];
         TestCellModel *model2 = [[TestCellModel alloc]initWithText:@"第2个" color:[UIColor orangeColor]];
         TestCellModel *model3 = [[TestCellModel alloc]initWithText:@"第3个" color:[UIColor blueColor]];
-        [self.table loadData:@[model1,model2,model3] next:false];
+        [self.table loadData:@[model1,model2,model3] next:true];
 
     }
     
