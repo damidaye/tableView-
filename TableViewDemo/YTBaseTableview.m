@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
             
             weakSelf.state = TableRefreshDown;
             weakSelf.currCount = 1;
-            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
+            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",weakSelf.currCount]);
         }];
         
     }
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
             
             weakSelf.state = TableRefreshUp;
             weakSelf.currCount++;
-            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",self.currCount]);
+            weakSelf.refreshFooter([NSString stringWithFormat:@"%lu",weakSelf.currCount]);
         }];
     }
 }
