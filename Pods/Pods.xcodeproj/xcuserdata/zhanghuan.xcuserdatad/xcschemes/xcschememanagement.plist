@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FBRetainCycleDetector.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MLeaksFinder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TableViewDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -12,7 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CE83ADB66FDE507890F1319241BDD8FF</key>
+		<key>20FEE502C82545D9EFF4A9722061761C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF9D6EADD8E530631B349B6FDC56DA82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDEA8FACCAA730E49F8F23285539D126</key>
 		<dict>
 			<key>primary</key>
 			<true/>

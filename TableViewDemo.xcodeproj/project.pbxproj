@@ -37,6 +37,7 @@
 		198C892C1EE6DDF3001D6896 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 198C89161EE6DDF3001D6896 /* UIScrollView+MJExtension.m */; };
 		198C892D1EE6DDF3001D6896 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 198C89181EE6DDF3001D6896 /* UIScrollView+MJRefresh.m */; };
 		198C892E1EE6DDF3001D6896 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 198C891A1EE6DDF3001D6896 /* UIView+MJExtension.m */; };
+		1991D5A81EF5254500468766 /* TestVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1991D5A71EF5254500468766 /* TestVCViewController.m */; };
 		199EFEEB1EE55AE600405F0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 199EFEEA1EE55AE600405F0C /* main.m */; };
 		199EFEEE1EE55AE600405F0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 199EFEED1EE55AE600405F0C /* AppDelegate.m */; };
 		199EFEF11EE55AE600405F0C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199EFEF01EE55AE600405F0C /* ViewController.m */; };
@@ -107,6 +108,8 @@
 		198C89181EE6DDF3001D6896 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		198C89191EE6DDF3001D6896 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		198C891A1EE6DDF3001D6896 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		1991D5A61EF5254400468766 /* TestVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestVCViewController.h; path = MJRefresh/TestVCViewController.h; sourceTree = "<group>"; };
+		1991D5A71EF5254500468766 /* TestVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestVCViewController.m; path = MJRefresh/TestVCViewController.m; sourceTree = "<group>"; };
 		199EFEE61EE55AE600405F0C /* TableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199EFEEA1EE55AE600405F0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		199EFEEC1EE55AE600405F0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				198C88EC1EE6DDF2001D6896 /* MJRefresh */,
 				199EFEEC1EE55AE600405F0C /* AppDelegate.h */,
 				199EFEED1EE55AE600405F0C /* AppDelegate.m */,
+				1991D5A61EF5254400468766 /* TestVCViewController.h */,
+				1991D5A71EF5254500468766 /* TestVCViewController.m */,
 				199EFEEF1EE55AE600405F0C /* ViewController.h */,
 				199EFEF01EE55AE600405F0C /* ViewController.m */,
 				198C88D61EE67B97001D6896 /* TestCell.h */,
@@ -444,6 +449,7 @@
 				198C892E1EE6DDF3001D6896 /* UIView+MJExtension.m in Sources */,
 				198C891C1EE6DDF3001D6896 /* MJRefreshBackFooter.m in Sources */,
 				198C89201EE6DDF3001D6896 /* MJRefreshAutoGifFooter.m in Sources */,
+				1991D5A81EF5254500468766 /* TestVCViewController.m in Sources */,
 				198C89261EE6DDF3001D6896 /* MJRefreshGifHeader.m in Sources */,
 				199EFEF11EE55AE600405F0C /* ViewController.m in Sources */,
 				199EFEEE1EE55AE600405F0C /* AppDelegate.m in Sources */,
