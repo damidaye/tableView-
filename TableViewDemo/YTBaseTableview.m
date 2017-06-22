@@ -8,23 +8,15 @@
 
 
 #import "YTBaseTableview.h"
-#import "MJRefresh.h"
+#import <MJRefresh.h>
 
-typedef NS_ENUM(NSInteger, TableRefresh) {
-    
-    TableRefreshNormal = 0,
-    TableRefreshUp = 1,
-    TableRefreshDown = 2
-};
 
 @interface YTBaseTableview ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSMutableArray<YTBaseTableViewSectionModel *> *sections;
-@property(nonatomic,strong)NSMutableArray *cellData;
 @property(nonatomic,copy)NSString *cellIdentifier;
-@property(nonatomic,copy)NSString *sectionIdentifier;
-@property(nonatomic,assign)TableRefresh state;
+@property(nonatomic,copy)NSString *headerSectionIdentifier;
+@property(nonatomic,copy)NSString *footerSectionIdentifier;
 @property(nonatomic,assign)NSUInteger currCount;
 
 @end
@@ -54,7 +46,6 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
         
         [tableView registerNib:[UINib nibWithNibName:cellIdentifier bundle:nil] forCellReuseIdentifier:cellIdentifier];
     }
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
     tableView.dataSource = self;
     self.currCount = 1;
@@ -73,18 +64,30 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
 
 }
 
-- (void)registerHeaderFooterClass:(Class)headerFooterView{
+- (void)registerHeaderClass:(Class)headerView{
     
-    self.sectionIdentifier = NSStringFromClass(headerFooterView);
-    [self.tableView registerClass:headerFooterView forHeaderFooterViewReuseIdentifier:NSStringFromClass(headerFooterView)];
+    self.headerSectionIdentifier = NSStringFromClass(headerView);
+    [self.tableView registerClass:headerView forHeaderFooterViewReuseIdentifier:NSStringFromClass(headerView)];
 }
 
-- (void)registerHeaderFooterNibClassIdentifier:(NSString *)identifier{
+- (void)registerFooterClass:(Class)footerView{
     
-    self.sectionIdentifier = identifier;
+    self.footerSectionIdentifier = NSStringFromClass(footerView);
+    [self.tableView registerClass:footerView forHeaderFooterViewReuseIdentifier:NSStringFromClass(footerView)];
+}
+
+- (void)registerFooterNibClassIdentifier:(NSString *)identifier{
+    
+    self.headerSectionIdentifier = identifier;
     [self.tableView registerNib:[UINib nibWithNibName:identifier bundle:nil] forHeaderFooterViewReuseIdentifier:identifier];
 }
 
+- (void)registerHeaderNibClassIdentifier:(NSString *)identifier{
+    
+    self.footerSectionIdentifier = identifier;
+    [self.tableView registerNib:[UINib nibWithNibName:identifier bundle:nil] forHeaderFooterViewReuseIdentifier:identifier];
+    
+}
 
 - (void)loadData:(__kindof NSArray *)list next:(BOOL)hasNext{
     
@@ -97,7 +100,6 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
 }
 
 - (void)configTable{
-    
     BTWeakSelf;
     if (self.refreshHeader != nil) {
         
@@ -125,8 +127,10 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     if (self.state == TableRefreshNormal) {
         
         [self configTable];
+        self.currCount = 1;
         [fromDate removeAllObjects];
         [fromDate addObjectsFromArray:list];
+        self.tableView.mj_footer.hidden = (list.count == 0);
         [self.tableView reloadData];
         
     }else if (self.state == TableRefreshUp){
@@ -172,6 +176,8 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     
     YTBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
     [cell setCellModel:model];
+    tableView.mj_footer.hidden = !(self.tableView.mj_footer.frame.origin.y>self.tableView.height);
+    cell.cellClosure = self.configCell;
     return cell;
 }
 
@@ -179,11 +185,11 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     
     if (self.sections.count != 0) {
         
-        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.sectionIdentifier];
+        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.headerSectionIdentifier];
         YTBaseTableViewSectionModel *model = self.sections[section];
         if (model.headerModel) {
             if (!view) {
-                view = [NSClassFromString(self.sectionIdentifier) new];
+                view = [NSClassFromString(self.headerSectionIdentifier) new];
             }
             [view setHeadFooterModel:model.headerModel];
             return view;
@@ -204,12 +210,12 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     
     if (self.sections.count != 0) {
         
-        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.sectionIdentifier];
+        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.footerSectionIdentifier];
         YTBaseTableViewSectionModel *model = self.sections[section];
         if (model.footerModel) {
             if (!view) {
                 
-                view = [NSClassFromString(self.sectionIdentifier) new];
+                view = [NSClassFromString(self.footerSectionIdentifier) new];
             }
             [view setHeadFooterModel:model.footerModel];
             return view;
@@ -237,9 +243,9 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     if (self.sections.count != 0) {
         
         YTBaseTableViewSectionModel *model = self.sections[section];
-        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.sectionIdentifier];
+        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.footerSectionIdentifier];
         if (!view) {
-            view = [NSClassFromString(self.sectionIdentifier) new];
+            view = [NSClassFromString(self.footerSectionIdentifier) new];
         }
         return model.footerModel == nil ? 0.001 : [view getHeight];
         
@@ -254,9 +260,10 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
     if (self.sections.count != 0) {
         
         YTBaseTableViewSectionModel *model = self.sections[section];
-        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.sectionIdentifier];
+        YTTableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:self.headerSectionIdentifier];
         if (!view) {
-            view = [NSClassFromString(self.sectionIdentifier) new];
+            view = [NSClassFromString(self.headerSectionIdentifier
+                                      ) new];
         }
         return model.headerModel == nil ? 0.001 : [view getHeight];
         
@@ -268,19 +275,31 @@ typedef NS_ENUM(NSInteger, TableRefresh) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    id model;
     [tableView deselectRowAtIndexPath:indexPath animated:false];
     if (self.sections.count != 0) {
         
         if (indexPath.section>self.sections.count) {return;}
+    }else{
+        
+        if (indexPath.section>self.cellData.count) {return;}
+    }
+    !_didSelect? : _didSelect(tableView,indexPath,[self getSelectModel:indexPath]);
+}
+
+- (id)getSelectModel:(NSIndexPath *)indexPath{
+    
+    id model;
+    if (self.sections.count != 0) {
+        
         model = self.sections[indexPath.section].cellModel[indexPath.row];
         
     }else{
         
-        if (indexPath.section>self.cellData.count) {return;}
+        
         model = self.cellData[indexPath.row];
     }
-    !_didSelect? : _didSelect(tableView,indexPath,model);
+    
+    return model;
 }
 
 @end

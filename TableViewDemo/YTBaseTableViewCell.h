@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^cellConfig)(id model);
 
 @interface YTBaseTableViewCell : UITableViewCell
 
 - (CGFloat)getHeight;
 - (void)setCellModel:(id)T;
+@property(nonatomic,copy)cellConfig cellClosure;
 
 @end

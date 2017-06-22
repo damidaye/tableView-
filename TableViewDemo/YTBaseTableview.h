@@ -11,7 +11,13 @@
 #import "YTTableViewHeaderFooterView.h"
 #import "YTBaseTableViewSectionModel.h"
 #import "YTBaseTableViewCell.h"
-#define BTWeakSelf __weak typeof(self) weakSelf = self;
+typedef NS_ENUM(NSInteger, TableRefresh) {
+    
+    TableRefreshNormal = 0,
+    TableRefreshUp = 1,
+    TableRefreshDown = 2
+};
+
 typedef UIView *(^viewClosure)();
 typedef void(^refreshClosure)(NSString *currPage);
 typedef void(^callBack)();
@@ -23,13 +29,22 @@ typedef void(^selectClosure)(UITableView *tableView,NSIndexPath *indexPath,id mo
 
 - (UITableView *)createTableViewByNibClass:(CGRect)frame cellIdentifier:(NSString *)cellIdentifier style:(UITableViewStyle)style;
 
-- (void)registerHeaderFooterClass:(Class)headerFooterView;
+- (void)registerHeaderClass:(Class)headerView;
 
-- (void)registerHeaderFooterNibClassIdentifier:(NSString *)identifier;
+- (void)registerFooterClass:(Class)footerView;
+
+- (void)registerHeaderNibClassIdentifier:(NSString *)identifier;
+
+- (void)registerFooterNibClassIdentifier:(NSString *)identifier;
+
 
 - (void)loadData:(__kindof NSArray *)list next:(BOOL)hasNext;
 
 - (void)loadSectionData:(__kindof NSArray<YTBaseTableViewSectionModel *> *)list next:(BOOL)hasNext;
+
+@property(nonatomic,strong)NSMutableArray<YTBaseTableViewSectionModel *> *sections;
+
+@property(nonatomic,strong)NSMutableArray *cellData;
 
 @property(nonatomic,copy)viewClosure headerView;
 
@@ -40,5 +55,9 @@ typedef void(^selectClosure)(UITableView *tableView,NSIndexPath *indexPath,id mo
 @property(nonatomic,copy)refreshClosure refreshFooter;
 
 @property(nonatomic,copy)selectClosure didSelect;
+
+@property(nonatomic,assign)TableRefresh state;
+
+@property(nonatomic,copy)cellConfig configCell;
 
 @end
